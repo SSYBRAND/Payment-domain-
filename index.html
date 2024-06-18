@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .payment-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        .payment-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+        .payment-item:last-child {
+            margin-bottom: 0;
+        }
+        .payment-methods {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .payment-method {
+            cursor: pointer;
+        }
+        .payment-method img {
+            width: 60px;
+            height: 60px;
+        }
+        .amount-container {
+            margin: 20px 0;
+        }
+        .select-field {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+        .pay-button {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .pay-button:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <img src="https://see.fontimg.com/api/renderfont4/9Y2DK/eyJyIjoiZnMiLCJoIjoxMzAsInciOjIwMDAsImZzIjo2NSwiZmdjIjoiI0YzMjg2QiIsImJnYyI6IiNGRkZGRkYiLCJ0IjoxfQ/U2F0dHUgdGVjaG5vbG9naWU/nature-beauty-personal-use.png"width="70%">
+        <h2>Choose Your Domain Plan</h2>
+        <div class="amount-container">
+            <select id="amountSelect" class="select-field">
+                <option value="">Select a domain plan</option>
+                <option value="850">.com Domain - ₹850 for 1 year</option>
+                <option value="179">.com Domain - ₹179 for 1 month</option>
+                <option value="650">.in Domain - ₹650 for 1 year</option>
+                <option value="149">.in Domain - ₹149 for 1 month</option>
+                <option value="1100">.org Domain - ₹1100 for 1 year</option>
+                <option value="210">.org Domain - ₹210 for 1 month</option>
+            </select>
+        </div>
+        <h2>Choose Your Payment Method</h2>
+        <div class="payment-methods">
+            <div class="payment-method" onclick="selectPaymentMethod('Google Pay')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAZhBvGS7snJTFR9vBiNZ8rGGsaGvMAgOq-g&s" alt="Google Pay">
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('PhonePe')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIGP9S5WLFGtuTNmSHsTNnUrIDiuti0Qw5Raz_nWpGDQ&s" alt="PhonePe">
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('Paytm')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlE0z8QTUi6keTjD1Sywf5hr3WhBe1YCNKNA&usqp=CAU" alt="Paytm">
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('Net Banking')">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-netbanking-credit-debit-card-bank-transaction-3-32318.png" alt="Net Banking">
+            </div>
+        </div>
+        <button class="pay-button" onclick="processPayment()">Pay Now</button>
+    <br></br>
+       <br></br>
+       <center>After make payment send screenshot on this gmail&nbsp;<button><a href="mailto: ssybrand58@gmail.com">mail Now</a></button></center>
+    
+    </div>
+
+    <script>
+        let selectedPaymentMethod = null;
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            alert(`Selected payment method: ${method}`);
+        }
+
+        function processPayment() {
+            var amountSelect = document.getElementById('amountSelect');
+            var selectedAmount = amountSelect.value;
+
+            if (!selectedAmount) {
+                alert('Please select a domain plan.');
+                return;
+            }
+
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method.');
+                return;
+            }
+
+            var upiId = 'sattu0001@axl';
+            var upiUrl = `upi://pay?pa=${upiId}&pn=Sattu%20Technologies&tn=Domain%20Payment&am=${selectedAmount}&cu=INR`;
+
+            // Redirect to UPI app for payment
+            window.location.href = upiUrl;
+        }
+    </script>
+</body>
+</html>
